@@ -6,18 +6,21 @@ def main():
         sys.stdout.flush()
         # Wait for user input
         #input()
-        cmd=input().strip()
-        if cmd == "exit 0":
+        cmd=input().split()
+        command=cmd[0]
+        if command == "exit":
             sys.exit(0)
-        elif cmd.startswith("echo "):
-            print(cmd[len("echo "):])
-        elif cmd.startswith("type "):
-            if cmd[len("type "):]=="echo":
-                print("echo is a shell builtin")
-            elif cmd[len("type "):]=="exit":
-                print("exit is a shell builtin")
+        elif command=="echo ":
+            ans=""
+            for i in range(1,len(cmd)):
+                ans+=cmd[i]
+            print(ans.rstrip())
+        elif command=="type":
+            val=cmd[1]
+            if val in ["echo","exit","type"]:
+                print(f'{val} is a shell builtin')
             else:
-                print(f"{cmd[len('type '):]}: not found")
+                print(f'{val} not found')
         else:
             print(f"{cmd}: command not found")
 
