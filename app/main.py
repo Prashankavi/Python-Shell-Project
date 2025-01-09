@@ -7,7 +7,7 @@ def main():
         sys.stdout.flush()
         # Wait for user input
         #input()
-        cmd=input().split()
+        cmd=input().split(" ")
         command=cmd[0]
         if command == "exit":
             sys.exit(0)
@@ -28,7 +28,7 @@ def main():
                 print(f'{val} not found')
         else:
             #print(f"{cmd[0]}: command not found")
-            if os.path.isfile(cmd.split(" ")[0]):
+            if os.path.isfile(cmd[0]):
                     os.system(cmd)
             else:
                 print(f"{command}: command not found")
