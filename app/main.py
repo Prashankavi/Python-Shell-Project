@@ -6,10 +6,13 @@ def main():
         sys.stdout.flush()
         # Wait for user input
         #input()
-        cmd=input()
+        cmd=input().strip()
         if cmd == "exit 0":
-            break
-        print(f"{cmd}: command not found")
+            sys.exit(0)
+        elif cmd.startswith("echo "):
+            print(cmd[len("echo "):])
+        else:
+            print(f"{cmd}: command not found")
 
 if __name__ == "__main__":
     main()
