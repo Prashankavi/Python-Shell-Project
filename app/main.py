@@ -26,7 +26,7 @@ def main():
             if val in ["echo","exit","type"]:
                 print(f'{val} is a shell builtin')
             elif cmdpath:
-                sys.stdout.write(f"{cmd} is {cmdpath}\n")
+                sys.stdout.write(f"{val} is {cmdpath}\n")
             else:
                 print(f'{val} not found')
         else:
