@@ -1,9 +1,8 @@
 import sys
 
-cmds=set()  
 def main():
     while True:
-        sys.stdout.write(cmd)
+        sys.stdout.write("$ ")
         sys.stdout.flush()
         # Wait for user input
         #input()
