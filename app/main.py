@@ -13,7 +13,7 @@ def main():
         elif command=="echo ":
             ans=""
             for i in cmd[1:]:
-                ans+=cmd[i]
+                ans+=f'{i}'
             print(ans.rstrip())
         elif command=="type":
             val=cmd[1]
