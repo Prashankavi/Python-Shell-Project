@@ -12,10 +12,7 @@ def main():
         if command == "exit":
             sys.exit(0)
         elif command=="echo":
-            ans=""
-            for i in cmd[1:]:
-                ans+=f"{i} "
-            print(ans.rstrip())
+            print(" ".join(cmd[1:]))
         elif command=="type":
             val=cmd[1]
             cmdpath=None
@@ -26,15 +23,15 @@ def main():
             if val in ["echo","exit","type"]:
                 print(f'{val} is a shell builtin')
             elif cmdpath:
-                sys.stdout.write(f"{val} is {cmdpath}\n")
+                print(f"{val} is {cmdpath}\n")
             else:
                 print(f'{val} not found')
         else:
             #print(f"{cmd[0]}: command not found")
             if os.path.isfile(command):
-                os.system(command)
+                os.system(" ".join(cmd))
             else:
-                print(f"{cmd[0]}: command not found")
+                print(f"{command}: command not found")
 
 if __name__ == "__main__":
     main()
