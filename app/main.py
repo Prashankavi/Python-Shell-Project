@@ -32,18 +32,18 @@ def main():
                     os.system(cmd)
             else:
                 executable_path = None
-            paths = path.split(":")
-            for directory in paths:
-                potential_path = os.path.join(directory, command)
-                if os.access(potential_path, os.X_OK):
-                    executable_path = potential_path
-                    break
-            if not executable_path and os.access(command, os.X_OK):
-                executable_path = os.path.abspath(command)
-            if executable_path:
-                os.system(" ".join(cmd))
-            else:
-                print(f"{command}: command not found")
+                paths = path.split(":")
+                for directory in paths:
+                    potential_path = os.path.join(directory, command)
+                    if os.access(potential_path, os.X_OK):
+                        executable_path = potential_path
+                        break
+                if not executable_path and os.access(command, os.X_OK):
+                    executable_path = os.path.abspath(command)
+                if executable_path:
+                    os.system(" ".join(cmd))
+                else:
+                    print(f"{command}: command not found")
 
 if __name__ == "__main__":
     main()
