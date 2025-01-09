@@ -1,18 +1,16 @@
 import sys
 
-cmds=set()
-def write(cmd):
-    sys.stdout.write(cmd)
-    sys.stdout.flush()
+cmds=set()  
 def main():
-    write("$ ")
-
-    # Wait for user input
-    #input()
-    cmd=input()
-    if cmd not in cmds:
+    while True:
+        sys.stdout.write(cmd)
+        sys.stdout.flush()
+        # Wait for user input
+        #input()
+        cmd=input()
+        if cmd == "exit 0":
+            break
         print(f"{cmd}: command not found")
-        main()
 
 if __name__ == "__main__":
     main()
