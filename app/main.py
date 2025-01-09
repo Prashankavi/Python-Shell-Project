@@ -12,7 +12,7 @@ def main():
             sys.exit(0)
         elif command=="echo ":
             ans=""
-            for i in range(1,len(cmd)):
+            for i in cmd[1:]:
                 ans+=cmd[i]
             print(ans.rstrip())
         elif command=="type":
