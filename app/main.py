@@ -1,6 +1,7 @@
 import sys
-
+import os
 def main():
+    path=os.environ.get("PATH")        
     while True:
         sys.stdout.write("$ ")
         sys.stdout.flush()
@@ -16,9 +17,16 @@ def main():
                 ans+=f"{i} "
             print(ans.rstrip())
         elif command=="type":
-            val=cmd[1]
+            val=cmd.split(" ")[1]
+            cmdpath=None
+            paths=path.split(":")
+            for i in paths:
+                if os.path.exists(f"{i}/{val}"):
+                    cmdpath=f"{i}/{val}"
             if val in ["echo","exit","type"]:
                 print(f'{val} is a shell builtin')
+            elif cmdpath:
+                sys.stdout.write(f"{cmd} is {cmdpath}\n")
             else:
                 print(f'{val} not found')
         else:
