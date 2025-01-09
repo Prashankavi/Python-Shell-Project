@@ -17,7 +17,7 @@ def main():
                 ans+=f"{i} "
             print(ans.rstrip())
         elif command=="type":
-            val=cmd.split(" ")[1]
+            val=cmd[1]
             cmdpath=None
             paths=path.split(":")
             for i in paths:
