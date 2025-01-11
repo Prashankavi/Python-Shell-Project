@@ -19,18 +19,21 @@ def main():
             in_quotes = False
             current_val = []            
             for char in varss:
-                if char=="'" or char=='"':  
-                    in_quotes = not in_quotes
-                elif char == ' ' and not in_quotes:  
+                if char in '"\'':
+                    if not in_quotes:
+                        in_quotes = True
+                        quote_char = char
+                    elif in_quotes and char == quote_char:
+                        in_quotes = False
+                        quote_char = None
+                elif char==' ' and not in_quotes:  
                     if current_val:
                         val_parts.append("".join(current_val))
-                        current_val = []
+                        current_val=[]
                 else:
-                    current_val.append(char)
-            
+                    current_val.append(char)            
             if current_val: 
-                val_parts.append("".join(current_val))
-            
+                val_parts.append("".join(current_val))            
             print(" ".join(val_parts))
         elif command == "type":
             val = cmd[1]
