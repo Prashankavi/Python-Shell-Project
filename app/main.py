@@ -19,7 +19,7 @@ def main():
             in_quotes = False
             current_val = []            
             for char in varss:
-                if char == "'":  
+                if char == "'" or '"':  
                     in_quotes = not in_quotes
                 elif char == ' ' and not in_quotes:  
                     if current_val:
