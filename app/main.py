@@ -29,6 +29,8 @@ def main():
                 print(f"{val} is {cmdpath}")
             else:
                 print(f"{val} not found")
+        elif command == "pwd":
+            print(os.getcwd())
         else:
             executable_path = None
             paths = path.split(":")
