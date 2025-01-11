@@ -33,14 +33,24 @@ def main():
             print(os.getcwd())
         elif command == "cd":
             if len(cmd) > 1:
-                try:
-                    os.chdir(cmd[1])
-                except FileNotFoundError:
-                    print(f"cd: {cmd[1]}: No such file or directory")
-                except NotADirectoryError:
-                    print(f"cd: {cmd[1]}: Not a directory")
-                except PermissionError:
-                    print(f"cd: {cmd[1]}: Permission denied")
+                if cmd[1] == "~":
+                    hdir=os.environ.get("HOME","")
+                    if hdir:
+                        try:
+                            os.chdir(hdir)
+                        except Exception as e:
+                            print(f"cd: {cmd[1]}: {str(e)}")
+                    else:
+                        print("cd: HOME not set")
+                else:
+                    try:
+                        os.chdir(cmd[1])
+                    except FileNotFoundError:
+                        print(f"cd: {cmd[1]}: No such file or directory")
+                    except NotADirectoryError:
+                        print(f"cd: {cmd[1]}: Not a directory")
+                    except PermissionError:
+                        print(f"cd: {cmd[1]}: Permission denied")
             else:
                 print("cd: missing operand")
         else:
