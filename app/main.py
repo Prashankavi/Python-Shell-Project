@@ -1,44 +1,45 @@
 import sys
 import os
+
+def find_in_path(param):
+    path = os.environ['PATH']
+    print("Path: " + path)
+    print(f"Param: {param}")
+    for directory in path.split(":"):
+        for (dirpath, dirnames, filenames) in os.walk(directory):
+            if param in filenames:
+                return f"{dirpath}/{param}"
+    return None
+
 def main():
-    path=os.environ.get("PATH")        
     while True:
         sys.stdout.write("$ ")
         sys.stdout.flush()
         # Wait for user input
-        #input()
-        cmd=input().split(" ")
-        command=cmd[0]
-        if command == "exit":
-            sys.exit(0)
-        elif command=="echo":
-            print(" ".join(cmd[1:]))
-        elif command=="type":
-            val=cmd[1]
-            cmdpath=None
-            paths=path.split(":")
-            for i in paths:
-                if os.path.exists(f"{i}/{val}"):
-                    cmdpath=f"{i}/{val}"
-            if val in ["echo","exit","type"]:
-                print(f'{val} is a shell builtin')
-            elif cmdpath:
-                print(f"{val} is {cmdpath}\n")
+        command = input()
+        parts = command.split(" ")
+
+        if parts[0] == "exit" and len(parts) > 1 and parts[1] == "0":
+            exit(0)
+        elif parts[0] == "echo":
+            print(" ".join(parts[1:]))
+        elif parts[0] == "type":
+            if len(parts) > 1:
+                cmd = parts[1:]
+                if cmd[0] in ["echo", "exit", "type"]:
+                    print(f"${cmd[0]} is a shell builtin")
+                else:
+                    location = find_in_path(cmd[0])
+                    if location:
+                        print(f"${cmd[0]} is {location}")
+                    else:
+                        print(f"${' '.join(cmd)} not found")
             else:
-                print(f'{val} not found')
+                print("type: missing argument")
         else:
-            #print(f"{cmd[0]}: command not found")
-            executable_path=None
-            paths=path.split(":")
-            for directory in paths:
-                potential_path=os.path.join(directory, command)
-                if os.access(potential_path, os.X_OK):
-                    executable_path = potential_path
-                    break
-            if not executable_path and os.access(command, os.X_OK):
-                executable_path = os.path.abspath(command)
-            if executable_path:
-                os.system(" ".join(cmd))
+            # For other commands
+            if os.path.isfile(parts[0]):
+                os.system(command)
             else:
                 print(f"{command}: command not found")
 
