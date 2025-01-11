@@ -33,9 +33,16 @@ def main():
             print(os.getcwd())
         elif command == "cd":
             if len(cmd) > 1:
-                os.chdir(cmd[1])
+                try:
+                    os.chdir(cmd[1])
+                except FileNotFoundError:
+                    print(f"cd: {cmd[1]}: No such file or directory")
+                except NotADirectoryError:
+                    print(f"cd: {cmd[1]}: Not a directory")
+                except PermissionError:
+                    print(f"cd: {cmd[1]}: Permission denied")
             else:
-                os.chdir(f"cd: {cmd[1:]}: No such file or directory")
+                print("cd: missing operand")
         else:
             executable_path = None
             paths = path.split(":")
