@@ -15,13 +15,23 @@ def main():
             sys.exit(0)
         elif command == "echo":
             varss = " ".join(cmd[1:]).strip()
-            val=" ".join(varss.split())
-            if val.startswith("'") and val.endswith("'"):
-                val = val[1:-1]
-                print(val)
-            else:
-                value=" ".join(val.split())
-                print(value)
+            val_parts = []
+            in_quotes = False
+            current_val = []            
+            for char in varss:
+                if char == "'":  
+                    in_quotes = not in_quotes
+                elif char == ' ' and not in_quotes:  
+                    if current_val:
+                        val_parts.append("".join(current_val))
+                        current_val = []
+                else:
+                    current_val.append(char)
+            
+            if current_val: 
+                val_parts.append("".join(current_val))
+            
+            print(" ".join(val_parts))
         elif command == "type":
             val = cmd[1]
             cmdpath = None
