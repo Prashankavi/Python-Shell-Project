@@ -23,7 +23,7 @@ def main():
                 if os.path.exists(f"{directory}/{val}"):
                     cmdpath = f"{directory}/{val}"
                     break  # Stop searching after finding the first match
-            if val in ["echo", "exit", "type"]:
+            if val in ["echo", "exit", "type", "pwd"]:
                 print(f"{val} is a shell builtin")
             elif cmdpath:
                 print(f"{val} is {cmdpath}")
