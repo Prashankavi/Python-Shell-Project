@@ -35,7 +35,7 @@ def main():
             if len(cmd) > 1:
                 os.chdir(cmd[1])
             else:
-                os.chdir(os.environ.get("HOME"))
+                os.chdir(f"cd: {cmd[1:]}: No such file or directory")
         else:
             executable_path = None
             paths = path.split(":")
