@@ -23,7 +23,7 @@ def main():
                     if not in_quotes:
                         in_quotes = True
                         quote_char = char
-                    elif in_quotes and char == quote_char:
+                    elif char == quote_char:
                         in_quotes = False
                         quote_char = None
                 elif char==' ' and not in_quotes:  
