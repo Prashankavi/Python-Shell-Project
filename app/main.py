@@ -5,10 +5,10 @@ def main():
     path = os.environ.get("PATH")
     
     while True:
-        sys.stdout.write("$ ")  # Ensure the prompt is printed initially
+        sys.stdout.write("$ ")  # Prompt printed at the start of the loop
         sys.stdout.flush()
         
-        cmd = input().split(" ")
+        cmd = input().strip().split(" ")
         command = cmd[0]
 
         if command == "exit":
@@ -43,10 +43,6 @@ def main():
                 os.system(" ".join(cmd))
             else:
                 print(f"{command}: command not found")
-        
-        # Ensure the prompt is printed after processing every command
-        sys.stdout.write("$ ")
-        sys.stdout.flush()
 
 if __name__ == "__main__":
     main()
