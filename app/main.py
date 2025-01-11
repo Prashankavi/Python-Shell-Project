@@ -23,7 +23,7 @@ def main():
                 if os.path.exists(f"{directory}/{val}"):
                     cmdpath = f"{directory}/{val}"
                     break  # Stop searching after finding the first match
-            if val in ["echo", "exit", "type", "pwd"]:
+            if val in ["echo", "exit", "type", "pwd", "cd"]:
                 print(f"{val} is a shell builtin")
             elif cmdpath:
                 print(f"{val} is {cmdpath}")
@@ -31,6 +31,11 @@ def main():
                 print(f"{val} not found")
         elif command == "pwd":
             print(os.getcwd())
+        elif command == "cd":
+            if len(cmd) > 1:
+                os.chdir(cmd[1])
+            else:
+                os.chdir(os.environ.get("HOME"))
         else:
             executable_path = None
             paths = path.split(":")
