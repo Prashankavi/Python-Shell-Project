@@ -14,7 +14,12 @@ def main():
         if command == "exit":
             sys.exit(0)
         elif command == "echo":
-            print(" ".join(cmd[1:]))
+            val = " ".join(cmd[1:])
+            if val.startswith("'") and val.endswith("'"):
+                val = val[1:-1]
+                print(val)
+            else:
+                print(" ".join(cmd[1:]))
         elif command == "type":
             val = cmd[1]
             cmdpath = None
