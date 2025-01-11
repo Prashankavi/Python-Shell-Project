@@ -18,6 +18,7 @@ def main():
             for i in paths:
                 if os.path.exists(f"{i}/{val}"):
                     cmdpath=f"{i}/{val}"
+                    break
             if val in ["echo","exit","type"]:
                 print(f'{val} is a shell builtin')
             elif cmdpath:
@@ -25,7 +26,6 @@ def main():
             else:
                 print(f'{val} not found')
         else:
-            #print(f"{cmd[0]}: command not found")
             executable_path=None
             paths=path.split(":")
             for directory in paths:
@@ -39,6 +39,8 @@ def main():
                 os.system(" ".join(cmd))
             else:
                 print(f"{command}: command not found")
+        sys.stdout.write("$ ")
+        sys.stdout.flush()
 
 if __name__ == "__main__":
     main()
