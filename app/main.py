@@ -26,6 +26,8 @@ def main():
                     elif char == quote_char:
                         in_quotes = False
                         quote_char = None
+                    else:
+                        current_val.append(char)
                 elif char==' ' and not in_quotes:  
                     if current_val:
                         val_parts.append("".join(current_val))
