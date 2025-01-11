@@ -14,8 +14,7 @@ def main():
         if command == "exit":
             sys.exit(0)
         elif command == "echo":
-            varss = " ".join(cmd[1:]).strip()
-            val=" ".join(varss.split())
+            val = " ".join(" ".join(cmd[1:]).split())
             if val.startswith("'") and val.endswith("'"):
                 val = val[1:-1]
                 print(val)
